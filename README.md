@@ -1,23 +1,24 @@
-# Enterprise Warehouse Management System (WMS)
+# Enterprise Warehouse Management System
 
-## Overview
-A cloud-based Warehouse Management System built using Java, Spring Boot, and PostgreSQL to automate inventory tracking, warehouse management, and order fulfillment.
+A cloud-based Warehouse Management System built using Java, Spring Boot, and MySQL.
 
 ## Tech Stack
-- Java 17
+
+- Java 21
 - Spring Boot 3
 - Spring Data JPA
-- PostgreSQL
+- MySQL
 - Maven
-- React (Frontend - Upcoming)
 
 ## Features
+
 - Product Management
 - Warehouse Management
 - Inventory Tracking
 - Order Processing
-- Barcode/QR Code Integration
+- Barcode Integration
 - JWT Authentication
 
-## Project Status
- Initial project setup completed.
+## Status
+
+Project initialization completed.

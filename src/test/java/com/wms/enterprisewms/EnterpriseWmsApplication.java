@@ -9,5 +9,4 @@ public class EnterpriseWmsApplication {
     public static void main(String[] args) {
         SpringApplication.run(EnterpriseWmsApplication.class, args);
     }
-
 }
