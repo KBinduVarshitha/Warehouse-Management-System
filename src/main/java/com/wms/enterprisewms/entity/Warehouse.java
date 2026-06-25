@@ -1,6 +1,7 @@
 package com.wms.enterprisewms.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "warehouses")
@@ -17,6 +18,9 @@ public class Warehouse {
     private String location;
 
     private Integer capacity;
+
+    @OneToMany(mappedBy = "warehouse")
+    private List<StorageBin> storageBins;
 
     public Warehouse() {
     }
@@ -51,5 +55,13 @@ public class Warehouse {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public List<StorageBin> getStorageBins() {
+        return storageBins;
+    }
+
+    public void setStorageBins(List<StorageBin> storageBins) {
+        this.storageBins = storageBins;
     }
 }
