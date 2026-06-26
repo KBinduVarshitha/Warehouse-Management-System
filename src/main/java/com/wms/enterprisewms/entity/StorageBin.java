@@ -1,6 +1,7 @@
 package com.wms.enterprisewms.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "storage_bins")
@@ -15,6 +16,9 @@ public class StorageBin {
 
     private Integer capacity;
 
+    @OneToMany(mappedBy = "storageBin")
+    private List<InventoryItem> inventoryItems;
+    
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;

@@ -1,6 +1,7 @@
 package com.wms.enterprisewms.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -62,4 +63,7 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @OneToMany(mappedBy = "product")
+    private List<InventoryItem> inventoryItems;
 }
