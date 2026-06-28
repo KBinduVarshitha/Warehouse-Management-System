@@ -3,7 +3,12 @@ package com.wms.enterprisewms.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "inventory_items")
+@Table(
+    name = "inventory_items",
+    uniqueConstraints = @UniqueConstraint(
+        columnNames = {"product_id", "bin_id"}
+    )
+)
 public class InventoryItem {
 
     @Id

@@ -34,10 +34,22 @@ public class ReceivingService {
         StorageBin storageBin = storageBinRepository.findById(request.getStorageBinId())
                 .orElseThrow(() -> new RuntimeException("Storage Bin not found"));
 
-        InventoryItem inventoryItem = new InventoryItem();
-        inventoryItem.setProduct(product);
-        inventoryItem.setStorageBin(storageBin);
-        inventoryItem.setQuantity(request.getQuantity());
+        InventoryItem inventoryItem = inventoryItemRepository
+                .findByProductProductIdAndStorageBinBinId(
+                        request.getProductId(),
+                        request.getStorageBinId())
+                .orElse(null);
+
+        if (inventoryItem == null) {
+            inventoryItem = new InventoryItem();
+            inventoryItem.setProduct(product);
+            inventoryItem.setStorageBin(storageBin);
+            inventoryItem.setQuantity(request.getQuantity());
+        } else {
+            inventoryItem.setQuantity(
+                    inventoryItem.getQuantity() + request.getQuantity()
+            );
+        }
 
         return inventoryItemRepository.save(inventoryItem);
     }
