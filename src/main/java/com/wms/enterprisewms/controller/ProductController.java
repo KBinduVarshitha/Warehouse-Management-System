@@ -30,4 +30,10 @@ public class ProductController {
     public List<Product> searchProducts(@RequestParam String name) {
         return productService.searchProducts(name);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return "Product deleted successfully";
+    }
 }

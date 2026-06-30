@@ -23,7 +23,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<Product> searchProducts(String name){
+    public List<Product> searchProducts(String name) {
         return productRepository.findByProductNameContainingIgnoreCase(name);
+    }
+
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 }
