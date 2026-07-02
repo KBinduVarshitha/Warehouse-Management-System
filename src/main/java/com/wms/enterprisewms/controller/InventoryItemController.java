@@ -25,4 +25,9 @@ public class InventoryItemController {
     public List<InventoryItem> getAllInventoryItems() {
         return inventoryItemService.getAllInventoryItems();
     }
+
+    @GetMapping("/report")
+    public List<InventoryItem> report(){
+        return inventoryItemService.getInventoryReport();
+    }
 }
