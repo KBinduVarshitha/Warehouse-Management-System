@@ -1,6 +1,7 @@
 package com.wms.enterprisewms.service;
 
 import com.wms.enterprisewms.entity.Product;
+import com.wms.enterprisewms.exception.ResourceNotFoundException;
 import com.wms.enterprisewms.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,31 +16,35 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    // Add Product
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
+    // Get All Products
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
+    // Search Product
     public List<Product> searchProducts(String name) {
         return productRepository.findByProductNameContainingIgnoreCase(name);
     }
 
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+    // Get Product By Id
+    public Product getProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Product not found with id: " + id));
     }
 
-    public Product updateProduct(Long id, Product product) {
+    // Delete Product
+    public void deleteProduct(Long id) {
 
-        Product existing = productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Product not found with id: " + id));
 
-        existing.setProductName(product.getProductName());
-        existing.setSku(product.getSku());
-        existing.setDescription(product.getDescription());
-        existing.setPrice(product.getPrice());
-
-        return productRepository.save(existing);
+        productRepository.delete(product);
     }
 }
