@@ -2,6 +2,7 @@ package com.wms.enterprisewms.controller;
 
 import com.wms.enterprisewms.entity.Product;
 import com.wms.enterprisewms.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,34 +17,41 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // Add Product
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
 
-    // Get All Products
     @GetMapping
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    // Get Product By Id
+    @GetMapping("/paged")
+    public Page<Product> getProductsWithPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "productId") String sortBy) {
+
+        return productService.getProductsWithPagination(page, size, sortBy);
+    }
+
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
 
-    // Search Products
     @GetMapping("/search")
     public List<Product> searchProducts(@RequestParam String name) {
         return productService.searchProducts(name);
     }
 
-    // Delete Product
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable Long id) {
+
         productService.deleteProduct(id);
+
         return "Product deleted successfully";
     }
+
 }
