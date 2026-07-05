@@ -38,12 +38,30 @@ public class ProductService {
     public Product getProductById(Long id) {
 
         return productRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
     }
 
     public List<Product> searchProducts(String name) {
         return productRepository.findByProductNameContainingIgnoreCase(name);
+    }
+
+    public List<Product> getProductsByPriceRange(Double minPrice, Double maxPrice) {
+        return productRepository.findByPriceBetween(minPrice, maxPrice);
+    }
+
+    public List<Product> getProductBySku(String sku) {
+        return productRepository.findBySku(sku);
+    }
+
+    public List<Product> filterProducts(String name,
+            Double minPrice,
+            Double maxPrice) {
+
+        return productRepository
+                .findByProductNameContainingIgnoreCaseAndPriceBetween(
+                        name,
+                        minPrice,
+                        maxPrice);
     }
 
     public void deleteProduct(Long id) {

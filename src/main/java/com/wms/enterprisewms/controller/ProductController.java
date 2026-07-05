@@ -54,4 +54,33 @@ public class ProductController {
         return "Product deleted successfully";
     }
 
+    @GetMapping("/price")
+    public List<Product> getProductsByPriceRange(
+            @RequestParam Double minPrice,
+            @RequestParam Double maxPrice) {
+
+        return productService.getProductsByPriceRange(minPrice, maxPrice);
+    }
+
+    @GetMapping("/sku/{sku}")
+    public Product getProductBySku(@PathVariable String sku) {
+
+        List<Product> products = productService.getProductBySku(sku);
+
+        if (products.isEmpty()) {
+            throw new RuntimeException("Product not found");
+        }
+
+        return products.get(0);
+    }
+
+    @GetMapping("/filter")
+    public List<Product> filterProducts(
+            @RequestParam String name,
+            @RequestParam Double minPrice,
+            @RequestParam Double maxPrice) {
+
+        return productService.filterProducts(name, minPrice, maxPrice);
+    }
+
 }
