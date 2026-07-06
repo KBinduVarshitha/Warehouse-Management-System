@@ -4,6 +4,7 @@ import com.wms.enterprisewms.entity.InventoryItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
+import java.util.List;
 
 public interface InventoryItemRepository extends JpaRepository<InventoryItem, Long> {
 
@@ -11,5 +12,6 @@ public interface InventoryItemRepository extends JpaRepository<InventoryItem, Lo
             Long productId,
             Long binId
     );
+    List<InventoryItem> findAllByOrderByQuantityDesc();
 
 }

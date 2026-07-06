@@ -23,7 +23,7 @@ public class InventoryItemService {
         return inventoryItemRepository.findAll();
     }
 
-    public List<InventoryItem> getInventoryReport(){
-    return inventoryItemRepository.findAll();
-}
+    public List<InventoryItem> getInventoryReport() {
+        return inventoryItemRepository.findAllByOrderByQuantityDesc();
+    }
 }
