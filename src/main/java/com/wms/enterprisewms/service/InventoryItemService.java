@@ -26,4 +26,8 @@ public class InventoryItemService {
     public List<InventoryItem> getInventoryReport() {
         return inventoryItemRepository.findAllByOrderByQuantityDesc();
     }
+
+    public List<InventoryItem> getInventoryByWarehouse(Long warehouseId) {
+        return inventoryItemRepository.findByStorageBinWarehouseWarehouseId(warehouseId);
+    }
 }

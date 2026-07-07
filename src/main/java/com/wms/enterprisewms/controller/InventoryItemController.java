@@ -27,7 +27,12 @@ public class InventoryItemController {
     }
 
     @GetMapping("/report")
-    public List<InventoryItem> report(){
+    public List<InventoryItem> getInventoryReport() {
         return inventoryItemService.getInventoryReport();
+    }
+
+    @GetMapping("/warehouse/{warehouseId}")
+    public List<InventoryItem> getInventoryByWarehouse(@PathVariable Long warehouseId) {
+        return inventoryItemService.getInventoryByWarehouse(warehouseId);
     }
 }
