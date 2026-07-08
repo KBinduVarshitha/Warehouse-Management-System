@@ -14,4 +14,5 @@ public interface InventoryItemRepository extends JpaRepository<InventoryItem, Lo
 
     List<InventoryItem> findByStorageBinWarehouseWarehouseId(Long warehouseId);
 
+    List<InventoryItem> findByQuantityLessThan(Integer quantity);
 }

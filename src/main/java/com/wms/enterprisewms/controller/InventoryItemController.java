@@ -35,4 +35,10 @@ public class InventoryItemController {
     public List<InventoryItem> getInventoryByWarehouse(@PathVariable Long warehouseId) {
         return inventoryItemService.getInventoryByWarehouse(warehouseId);
     }
+
+    @GetMapping("/low-stock")
+    public List<InventoryItem> getLowStockItems(
+            @RequestParam(defaultValue = "10") Integer threshold) {
+        return inventoryItemService.getLowStockItems(threshold);
+    }
 }

@@ -30,4 +30,8 @@ public class InventoryItemService {
     public List<InventoryItem> getInventoryByWarehouse(Long warehouseId) {
         return inventoryItemRepository.findByStorageBinWarehouseWarehouseId(warehouseId);
     }
+
+    public List<InventoryItem> getLowStockItems(Integer threshold) {
+        return inventoryItemRepository.findByQuantityLessThan(threshold);
+    }
 }
