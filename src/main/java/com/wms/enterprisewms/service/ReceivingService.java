@@ -2,13 +2,17 @@ package com.wms.enterprisewms.service;
 
 import com.wms.enterprisewms.dto.ReceivingRequest;
 import com.wms.enterprisewms.entity.InventoryItem;
+import com.wms.enterprisewms.entity.InventoryTransaction;
 import com.wms.enterprisewms.entity.Product;
 import com.wms.enterprisewms.entity.StorageBin;
+import com.wms.enterprisewms.entity.TransactionType;
 import com.wms.enterprisewms.repository.InventoryItemRepository;
 import com.wms.enterprisewms.repository.ProductRepository;
 import com.wms.enterprisewms.repository.StorageBinRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 public class ReceivingService {
@@ -16,13 +20,16 @@ public class ReceivingService {
     private final ProductRepository productRepository;
     private final StorageBinRepository storageBinRepository;
     private final InventoryItemRepository inventoryItemRepository;
+    private final InventoryTransactionService inventoryTransactionService;
 
     public ReceivingService(ProductRepository productRepository,
                             StorageBinRepository storageBinRepository,
-                            InventoryItemRepository inventoryItemRepository) {
+                            InventoryItemRepository inventoryItemRepository,
+                            InventoryTransactionService inventoryTransactionService) {
         this.productRepository = productRepository;
         this.storageBinRepository = storageBinRepository;
         this.inventoryItemRepository = inventoryItemRepository;
+        this.inventoryTransactionService = inventoryTransactionService;
     }
 
     @Transactional
@@ -51,6 +58,17 @@ public class ReceivingService {
             );
         }
 
-        return inventoryItemRepository.save(inventoryItem);
+        InventoryItem savedItem = inventoryItemRepository.save(inventoryItem);
+
+        InventoryTransaction transaction = new InventoryTransaction(
+                savedItem,
+                TransactionType.RECEIVED,
+                request.getQuantity(),
+                LocalDateTime.now()
+        );
+
+        inventoryTransactionService.saveTransaction(transaction);
+
+        return savedItem;
     }
 }
