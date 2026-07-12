@@ -34,4 +34,5 @@ public class InventoryItemService {
     public List<InventoryItem> getLowStockItems(Integer threshold) {
         return inventoryItemRepository.findByQuantityLessThan(threshold);
     }
+
 }
