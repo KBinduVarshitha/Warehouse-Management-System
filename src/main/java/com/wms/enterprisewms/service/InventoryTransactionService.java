@@ -1,6 +1,7 @@
 package com.wms.enterprisewms.service;
 
 import com.wms.enterprisewms.entity.InventoryTransaction;
+import com.wms.enterprisewms.entity.TransactionType;
 import com.wms.enterprisewms.repository.InventoryTransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class InventoryTransactionService {
     }
 
     public List<InventoryTransaction> getAllTransactions() {
-        return repository.findAll();
+        return repository.findAllByOrderByTransactionTimeDesc();
+    }
+
+    public List<InventoryTransaction> getTransactionsByType(TransactionType transactionType) {
+        return repository.findByTransactionTypeOrderByTransactionTimeDesc(transactionType);
     }
 }
