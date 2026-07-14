@@ -1,5 +1,6 @@
 package com.wms.enterprisewms.controller;
 
+import com.wms.enterprisewms.dto.WarehouseCapacityResponse;
 import com.wms.enterprisewms.entity.Warehouse;
 import com.wms.enterprisewms.service.WarehouseService;
 import org.springframework.web.bind.annotation.*;
@@ -24,5 +25,10 @@ public class WarehouseController {
     @GetMapping
     public List<Warehouse> getAllWarehouses() {
         return warehouseService.getAllWarehouses();
+    }
+
+    @GetMapping("/capacity")
+    public List<WarehouseCapacityResponse> getWarehouseCapacity() {
+        return warehouseService.getWarehouseCapacity();
     }
 }

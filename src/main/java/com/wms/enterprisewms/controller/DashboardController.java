@@ -1,6 +1,6 @@
 package com.wms.enterprisewms.controller;
 
-import com.wms.enterprisewms.entity.DashboardSummary;
+import com.wms.enterprisewms.dto.DashboardResponse;
 import com.wms.enterprisewms.service.DashboardService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +16,8 @@ public class DashboardController {
         this.dashboardService = dashboardService;
     }
 
-    @GetMapping("/summary")
-    public DashboardSummary getSummary() {
-        return dashboardService.getSummary();
+    @GetMapping
+    public DashboardResponse getDashboard() {
+        return dashboardService.getDashboardData();
     }
 }
