@@ -4,6 +4,7 @@ import com.wms.enterprisewms.entity.InventoryTransaction;
 import com.wms.enterprisewms.entity.TransactionType;
 import com.wms.enterprisewms.service.InventoryTransactionService;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDateTime;
 
 import java.util.List;
 
@@ -26,5 +27,13 @@ public class InventoryTransactionController {
     public List<InventoryTransaction> getTransactionsByType(
             @PathVariable TransactionType type) {
         return service.getTransactionsByType(type);
+    }
+
+    @GetMapping("/date")
+    public List<InventoryTransaction> getTransactionsByDate(
+            @RequestParam LocalDateTime startDate,
+            @RequestParam LocalDateTime endDate) {
+
+        return service.getTransactionsBetweenDates(startDate, endDate);
     }
 }

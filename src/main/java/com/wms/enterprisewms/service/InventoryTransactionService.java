@@ -4,6 +4,7 @@ import com.wms.enterprisewms.entity.InventoryTransaction;
 import com.wms.enterprisewms.entity.TransactionType;
 import com.wms.enterprisewms.repository.InventoryTransactionRepository;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 import java.util.List;
 
@@ -26,5 +27,12 @@ public class InventoryTransactionService {
 
     public List<InventoryTransaction> getTransactionsByType(TransactionType transactionType) {
         return repository.findByTransactionTypeOrderByTransactionTimeDesc(transactionType);
+    }
+
+    public List<InventoryTransaction> getTransactionsBetweenDates(
+            LocalDateTime startDate,
+            LocalDateTime endDate) {
+
+        return repository.findByTransactionTimeBetween(startDate, endDate);
     }
 }
