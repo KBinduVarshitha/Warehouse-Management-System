@@ -10,6 +10,8 @@ public interface InventoryItemRepository extends JpaRepository<InventoryItem, Lo
 
     Optional<InventoryItem> findByProductProductIdAndStorageBinBinId(Long productId, Long binId);
 
+    Optional<InventoryItem> findByProductProductId(Long productId);
+    
     List<InventoryItem> findAllByOrderByQuantityDesc();
 
     List<InventoryItem> findByStorageBinWarehouseWarehouseId(Long warehouseId);
