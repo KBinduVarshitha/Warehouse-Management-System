@@ -3,24 +3,25 @@ package com.wms.enterprisewms.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Entity
-@Table(name = "users")
 @Data
+@Table(name="users")
 public class User {
 
+
     @Id
-    @GeneratedValue(
-            strategy =
-                    GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(
-            unique = true
-    )
-    private String email;
+
+    private String username;
+
 
     private String password;
 
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 }
